@@ -1,6 +1,7 @@
 <?php
 class kelimeAyikla{
    function kelime_bul($metin,$aranan){
+       /*fonksiyondaki $metin parametresi metin $aranan parametresi ise o metinde aranacak kelimeyi ifade eder*/
        $dizi =explode(" ",$metin);
        $i=0;
        foreach($dizi as $val=>$key ){
