@@ -1,7 +1,26 @@
 <?php
 class kelimeAyikla{
+    /**
+     *
+     */
+    public $db;
+        function __construct(){
+        $host = "localhost";
+        $dbname = "arama";
+        $user = "root";
+        $pass= "";
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
 
-   function kelime_bul($metin,$aranan){
+        try{
+            $this->db = new PDO($dsn,$user,$pass);
+        }
+        catch(PDOException $e) {
+            echo "[HATA]: Veritabanı-".$e->getMessage();
+        }
+    }
+
+
+   public function kelime_bul($metin,$aranan){
        /*fonksiyondaki $metin parametresi metin $aranan parametresi ise o metinde aranacak kelimeyi ifade eder*/
        $dizi =explode(" ",$metin);
        $i=0;
@@ -15,6 +34,26 @@ class kelimeAyikla{
        $yeniden = implode(" ",$str);
        echo $yeniden;
    }
+
+    /**
+     * @param $metin
+     * @param $aranan
+     * @return bool
+     */
+    public function yazdir($metin,$aranan){
+
+        $q = "INSERT INTO aranan_kelimeler VALUES (NULL ,:metin,:aranan,now())";
+        $sorgu = $this->db->prepare($q);
+        $sorgu->bindParam(":metin",$metin);
+        $sorgu->bindParam(":aranan",$aranan);
+        $sorgu->execute();
+        if($sorgu->rowCount()>0){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
 }
 

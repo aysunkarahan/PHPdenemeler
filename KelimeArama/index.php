@@ -23,7 +23,7 @@
     <input type="text" class="form-control" name="aranan" placeholder="Aranacak Kelime."/>
     </div>
     <div class="form-group">
-    <input type="submit" class="form-control" value="ARA"/>
+    <input type="submit" class="form-control" value="ARA" name="ara"/>
     </div>
 </form>
 </div>
@@ -33,7 +33,9 @@
 <?php
 require_once 'kelimeAyikla.php';
 $elma = new kelimeAyikla();
-if(isset($_POST["metin"])&&isset($_POST["aranan"])&&!empty($_POST["metin"])&&!empty($_POST["aranan"])){
+if(isset($_POST["ara"])&&isset($_POST["metin"])&&isset($_POST["aranan"])&&!empty($_POST["metin"])&&!empty($_POST["aranan"])){
+    $elma->yazdir($_POST["metin"],$_POST["aranan"]);
     $elma->kelime_bul($_POST["metin"], $_POST["aranan"]);
+
 }
 ?>
