@@ -1,6 +1,6 @@
 <?php
 
-class turkiye{
+class Turkiye{
     public  $db;
     function __construct(){
         $host="localhost";
